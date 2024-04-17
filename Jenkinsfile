@@ -49,7 +49,7 @@ URL: ${JOB_DISPLAY_URL}
                               playbook: 'main.yml',
                               inventory: 'inventory.txt',
                               credentialsId: 'ansible_creds',
-                              extras: "--tags mail,finalize --extra-vars \"mail_subject=\"${subject}\" mail_body=\"${body}\"\""
+                              extras: "--tags mail,finalize --extra-vars \"mail_subject='${subject}' mail_body='${body}'\""
                               )
                         }
                         break
