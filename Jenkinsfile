@@ -26,12 +26,13 @@ pipeline {
 	}
 }
 def send_mail(method) {
+	def currentDate = sh(script:"date \"+%Y/%m/%d %T\"", returnStdout: true)
 	def subject="Automated Pipeline email for ${JOB_NAME}: ${BUILD_NUMBER}(${currentBuild.currentResult})"
 	def body="""
 This is an automated mail sent to you through ${method}.
 Pipeline execution status: ${currentBuild.currentResult}
 nginxG group users: tbd
-Pipeline Date: ${TAG_DATE}
+Pipeline Date: ${currentDate}
 """
         switch(method){
                 case "bash":
