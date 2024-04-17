@@ -1,10 +1,16 @@
 pipeline {
-    agent any 
-    stages {
-        stage('Stage 1') {
-            steps {
-                echo 'Hello world!' 
-            }
-        }
-    }
+	agent any
+	stages{
+		stage('Execute Ansible playbook'){
+			steps{
+				dir('ansible'){
+					ansiblePlaybook(
+						playbook: 'InstallNginx.yml',
+						inventory: 'inventory.txt',
+						credentialsId: 'ansible_creds'
+					)
+				}
+			}
+		}
+	}
 }
