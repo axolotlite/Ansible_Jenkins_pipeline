@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+	environment{
+		SMTP_PASSWORD=credentials("SMTP_PASSWORD")
+	}
 	stages{
 		stage('Execute Ansible playbook'){
 			steps{
@@ -15,9 +18,6 @@ pipeline {
 	}
 	post{
 		always{
-			environment{
-				SMTP_PASSWORD=credentials("SMTP_PASSWORD")
-			}
 			send_mail("bash")
 			send_mail("jenkins")
 			send_mail("ansible")
