@@ -1,7 +1,9 @@
+def nginxGUsers;
 pipeline {
 	agent any
 	environment{
 		SMTP_PASSWORD=credentials("SMTP_PASSWORD")
+		TARGET_HOST="target.project_net"
 	}
 	stages{
 		stage('Execute Ansible playbook'){
@@ -16,9 +18,17 @@ pipeline {
 			}
 		}
 	}
+	stage('Get nginxG group users'){
+		steps{
+			script{
+				sshagent(['ansible_creds]){
+					nginxGUsers = sh(script:"ssh -o StrictHostKeyChecking=no root@${TARGET_HOST} 'sh -s' < scripts/GroupMembers.sh", returnStdout:true)
+				}
+			}
+		}
+	}
 	post{
 		always{
-			send_mail("jenkins")
 			send_mail("ansible")
 			cleanWs()
 		}
@@ -30,7 +40,7 @@ def send_mail(method) {
 	def body="""
 This is an automated mail sent to you through ${method}.
 Pipeline execution status: ${currentBuild.currentResult}
-nginxG group users: tbd
+nginxG group users: ${nginxGUsers}
 Pipeline Date: ${currentDate}
 URL: ${JOB_DISPLAY_URL}
 """
