@@ -1,0 +1,6 @@
+---
+- name: Transfer key to target VMs
+  authorized_key:
+    user: root
+    state: present 
+    key: "{{ lookup('file', 'files/ansible_key.pub') }}"

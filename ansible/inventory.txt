@@ -1,0 +1,4 @@
+[servers]
+nginx_host ansible_host=192.168.100.171 
+jenkins_host ansible_host=192.168.100.144
+gogs_host ansible_host=192.168.100.254

@@ -1,0 +1,32 @@
+---
+  - name: Install nginx
+    become: yes
+    dnf:
+      name: nginx
+      state: present
+  - name: Enable nginx now
+    become: yes
+    systemd:
+      name: nginx
+      enabled: yes
+      state: started
+  - name: open nginx ports
+    become: yes
+    firewalld:
+      service: http
+      state: enabled
+      permanent: yes
+      immediate: yes
+  - name: Check locally
+    uri:
+      url: "http://localhost:80"
+      status_code: 200
+    register: nginx_response
+  - name: Handle nginx success response
+    debug:
+      msg: "nginx responded with: {{ nginx_response }}"
+    when: nginx_response.status == 200
+  - name: Handle nginx fail response
+    fail:
+      msg: "nginx responded with non 200 status code: {{nginx_response.status}}"
+    when: nginx_response.status != 200

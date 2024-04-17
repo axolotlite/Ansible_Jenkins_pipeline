@@ -1,0 +1,11 @@
+- name: "Sending an e-mail using Gmail SMTP servers"
+  community.general.mail:
+    host: "{{ smtp_server }}"
+    port: "{{ smtp_port }}"
+    username: "{{ smtp_username }}"
+    password: "{{ smtp_password }}"
+    to: "{{ mail_to }}"
+    subject: "Jenkins Pipeline {{ lookup('env','JOB_NAME')}}: {{lookup('env','BUILD_NUMBER')}}"
+    body: |
+      This is an automatic email sent to you through ansible to notify you that the build has been concluded, {{ lookup('env', 'BUILD_URL') }}
+      STATUS:{{build_status}}

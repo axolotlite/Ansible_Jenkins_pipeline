@@ -1,0 +1,36 @@
+---
+- name: "Generate ssh keys"
+  hosts: localhost
+  tasks:
+  - name: "Generate keypair"
+    community.crypto.openssh_keypair:
+      type: rsa
+      size: 4096
+      path: files/ansible_key
+      tags:
+        - ssh
+        - keygen
+- name: "setup root ssh key"
+  hosts: servers
+  become: yes
+  user: root
+  roles:
+    - ssh_setup
+  tags:
+    - ssh
+    - transfer_ssh
+- name: "Install nginx"
+  hosts: nginx_host 
+  user: root
+  roles:
+    - nginx
+  tags:
+    - nginx
+    - web
+- name: "send email"
+  hosts: localhost
+  roles:
+    - mailto
+  tags:
+    - mail
+    - finalize

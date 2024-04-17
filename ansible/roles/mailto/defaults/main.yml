@@ -1,0 +1,7 @@
+---
+pubkey: "{{ lookup('file', 'files/ansible_key.pub') }}"
+smtp_server: "{{ lookup('env','SMTP_SERVER') }}"
+smtp_port: "{{ lookup('env','SMTP_PORT') }}"
+smtp_username: "{{ lookup('env','SMTP_USERNAME') }}"
+smtp_password: "{{ lookup('env','SMTP_PASSWORD') }}"
+mail_to: "{{ lookup('env','TO') }}"

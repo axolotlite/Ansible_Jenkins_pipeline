@@ -1,0 +1,10 @@
+---
+- name: "Install nginx"
+  hosts: nginx_host 
+  user: root
+  roles:
+    - nginx
+  tags:
+    - nginx
+    - web
+
