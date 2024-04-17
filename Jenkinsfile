@@ -1,3 +1,6 @@
+import groovy.transform.Field
+
+@Field
 def nginxGUsers;
 pipeline {
 	agent any
