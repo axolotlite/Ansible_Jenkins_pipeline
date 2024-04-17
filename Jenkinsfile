@@ -21,7 +21,7 @@ pipeline {
 	stage('Get nginxG group users'){
 		steps{
 			script{
-				sshagent(['ansible_creds]){
+				sshagent(['ansible_creds']){
 					nginxGUsers = sh(script:"ssh -o StrictHostKeyChecking=no root@${TARGET_HOST} 'sh -s' < scripts/GroupMembers.sh", returnStdout:true)
 				}
 			}
