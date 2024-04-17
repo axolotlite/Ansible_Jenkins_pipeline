@@ -36,7 +36,7 @@ Pipeline Date: ${currentDate}
 """
         switch(method){
                 case "bash":
-                        sh "./mailto.sh \"${subject}\" \"${body}\""
+                        sh "./scripts/mailto.sh \"${subject}\" \"${body}\""
                         break
                 case "jenkins":
                         mail to: "${SMTP_USERNAME}",
