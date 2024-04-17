@@ -14,10 +14,10 @@ pipeline {
 		}
 	}
 	post{
-		environment{
-			SMTP_PASSWORD=credentials("SMTP_PASSWORD")
-		}
 		always{
+			environment{
+				SMTP_PASSWORD=credentials("SMTP_PASSWORD")
+			}
 			send_mail("bash")
 			send_mail("jenkins")
 			send_mail("ansible")
