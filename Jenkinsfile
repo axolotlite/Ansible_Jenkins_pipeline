@@ -18,7 +18,6 @@ pipeline {
 	}
 	post{
 		always{
-			send_mail("bash")
 			send_mail("jenkins")
 			send_mail("ansible")
 			cleanWs()
@@ -33,6 +32,7 @@ This is an automated mail sent to you through ${method}.
 Pipeline execution status: ${currentBuild.currentResult}
 nginxG group users: tbd
 Pipeline Date: ${currentDate}
+URL: ${JOB_DISPLAY_URL}
 """
         switch(method){
                 case "bash":
@@ -40,7 +40,7 @@ Pipeline Date: ${currentDate}
                         break
                 case "jenkins":
                         mail to: "${SMTP_USERNAME}",
-                             subject: "${subject}"
+                             subject: "${subject}",
                              body: "${body}"
                         break
                 case "ansible":
