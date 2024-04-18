@@ -52,7 +52,7 @@ URL: ${JOB_DISPLAY_URL}
                         sh "./scripts/mailto.sh \"${subject}\" \"${body}\""
                         break
                 case "jenkins":
-                        mail to: "${SMTP_USERNAME}",
+                        mail to: "${MAIL_TO}",
                              subject: "${subject}",
                              body: "${body}"
                         break
