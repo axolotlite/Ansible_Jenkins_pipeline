@@ -161,5 +161,5 @@ from there, add new credentials of type **SSH Username with private key** with i
 use your gogs account username and copy the entire private ssh key `jenkins_gogs_key`
 ![image](images/add_key_jenkins.png)
 now, in the configuration of any jenkins job you create, specify the ssh credentials you use for your account.
-![image](my_jenkins_branch.png)
+![image](images/my_jenkins_branch.png)
 
